@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+import argparse
+from pathlib import Path
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", default="data/input")
+    parser.add_argument("--count", type=int, default=1000)
+    parser.add_argument("--width", type=int, default=128)
+    parser.add_argument("--height", type=int, default=128)
+    args = parser.parse_args()
+
+    output = Path(args.output)
+    output.mkdir(parents=True, exist_ok=True)
+
+    for i in range(args.count):
+        path = output / f"image_{i:04d}.ppm"
+        with path.open("wb") as file:
+            file.write(f"P6\n{args.width} {args.height}\n255\n".encode())
+            pixels = bytearray()
+            for y in range(args.height):
+                for x in range(args.width):
+                    r = (x + i) % 256
+                    g = (y * 2 + i) % 256
+                    b = (x + y + i * 3) % 256
+                    pixels.extend((r, g, b))
+            file.write(pixels)
+
+    print(f"Generated {args.count} PPM images in {output}")
+
+
+if __name__ == "__main__":
+    main()
