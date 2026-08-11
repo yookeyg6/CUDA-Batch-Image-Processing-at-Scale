@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.18)
+project(cuda_batch_processor LANGUAGES CXX CUDA)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_executable(cuda_batch_processor
+    src/main.cu
+    src/cuda_processor.cu
+)
+
+target_include_directories(cuda_batch_processor PRIVATE include)
+
+set_target_properties(cuda_batch_processor PROPERTIES
+    CUDA_SEPARABLE_COMPILATION ON
+)
