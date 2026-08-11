@@ -1,0 +1,7 @@
+Place execution evidence here after running the project.
+
+Recommended files:
+- execution_log.txt
+- input_sample.ppm
+- output_sample.ppm
+- optional screenshot of the terminal showing the CUDA GPU and throughput
